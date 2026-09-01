@@ -31,6 +31,7 @@ return [
     ],
 
     'middleware' => [
+        'siswa' => App\Middleware\SiswaOnly::class,
         'auth'  => App\Middleware\Authenticate::class,
         'guest' => App\Middleware\RedirectIfAuthenticated::class,
         'admin' => App\Middleware\AdminOnly::class,

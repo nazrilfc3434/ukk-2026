@@ -6,6 +6,7 @@ use App\Controllers\Core\DatabaseController;
 use App\Controllers\Core\DocsController;
 use App\Controllers\Core\RoleController;
 use App\Controllers\Core\UserController;
+use App\controllers\KategoriController;
 use Sakuci\Route;
 
 /*
@@ -54,6 +55,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
 
     Route::get('/database/export', [DatabaseController::class, 'export'])->name('admin.database.export');
+    
+    Route::get('/kategori', [KategoriController::class, 'index'])->name('admin.kategori.index');
 });
 
 /*
@@ -66,6 +69,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 */
 // @generated-roles:start
 
+// @role:siswa:start
+Route::group(['prefix' => 'siswa', 'middleware' => 'siswa'], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('siswa.dashboard');
+});
+// @role:siswa:end
 // @generated-roles:end
 
 /*
