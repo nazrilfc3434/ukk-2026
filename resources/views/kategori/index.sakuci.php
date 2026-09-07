@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <h1>kategori</h1>
+    <a href="{{ route('kategori.create') }}" class="btn btn-primary mb-3 btn-sm">Tambah Kategori</a>
     <table class="table table-bordered table-striped">
         <thead> 
             <tr>

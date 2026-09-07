@@ -11,6 +11,10 @@ class KategoriController extends Controller
     public function index(Request $request)
     {
         $data = kategori::paginate(5);
-        return view('kategori.index', compact('data') );
+        return $this->view('kategori.index', compact('data') );
     }
+    public function create( request $request)
+    {
+        return $this->view('kategori.create');
+}
 }
