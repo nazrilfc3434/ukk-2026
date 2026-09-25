@@ -17,7 +17,8 @@
     <tbody>
         @php
         $no = 1;
-        @foreach (siswa as $x)
+        @endphp
+        @foreach ($data as $x)
         <tr>
           <tb>{{ $no++}}</td>
           <tb>{{ $×->nama }}</td>
@@ -31,8 +32,8 @@
         </tbody>
     </table>
  </div>
-      {!! $siswa->links() !!}       
-@endesection 
+      {!! $data->links() !!}       
+@endsection 
 
 
 

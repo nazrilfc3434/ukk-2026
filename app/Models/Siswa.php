@@ -6,7 +6,7 @@ use Sakuci\Database\Model;
 
 class Siswa extends Model
 {
-    protected static ?string $table = 'siswas';
+    protected static ?string $table = 'siswa';
 
     protected array $fillable = [];
 }

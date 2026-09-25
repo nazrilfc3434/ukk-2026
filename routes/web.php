@@ -8,6 +8,7 @@ use App\Controllers\Core\RoleController;
 use App\Controllers\Core\UserController;
 use App\Controllers\KategoriController;
 use App\Controllers\SiswaController;
+use App\Controllers\LokasiController;
 use Sakuci\Route;
 
 /*
@@ -64,7 +65,22 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::put('/kategori/{id_kategori}', [KategoriController::class, 'update'])->name('kategori.update');
     Route::delete('/kategori/{id_kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
+    Route::get('/alat', [AlatController::class, 'index'])->name('alat.index');
+    Route::get('/alat/create', [AlatController::class, 'create'])->name('alat.create');
+    Route::post('/alat', [AlatController::class, 'store'])->name('alat.store');
+    Route::get('/alat/{id}/edit', [AlatController::class, 'edit'])->name('alat.edit');
+    Route::put('/alat/{id}', [AlatController::class, 'update'])->name('alat.update');
+    Route::delete('/alat/{id}', [AlatController::class, 'destroy'])->name('alat.destroy');
+
     Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+
+    Route::get('/lokasi', [LokasiController::class, 'index'])->name('lokasi.index');
+    Route::get('/lokasi/create', [LokasiController::class, 'create'])->name('lokasi.create');
+    Route::post('/lokasi/store',[LokasiController::class,'store'])->name('lokasi.store.');
+    Route::get('/lokasi/{id_lokasi}/edit',[LokasiController::class,'edit'])->name('lokasi.edit');
+    Route::put('/lokasi/{id_lokasi}', [LokasiController::class,'update'])->name('lokasi.update');
+    Route::delete('/lokasi/{id_lokasi/{id_lokasi}',[LokasiController::class,'destroy'])->name('loaksi.destroy');
+
 });
 
 /*

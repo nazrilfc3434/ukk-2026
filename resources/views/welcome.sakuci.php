@@ -9,7 +9,7 @@
 
         <h1 class="display-5 fw-bold mb-3">
             Pengaduan Sarana & Prasarana,<br class="d-none d-md-inline">
-            <span class="text-brand">PEMUDA MASJID</span>
+            <span class="text-brand">masjid</span>
         </h1>
 
         <p class="lead text-secondary mx-auto mb-4" style="max-width: 620px;">

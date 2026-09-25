@@ -7,7 +7,9 @@
     <form action="{{ route('kategori.store') }}" method="POST">
         @csrf 
         <div class="form-group mb-3">
-            <label for="keterangan">Keterangan</label>
+            <label for="keterangan">Nama Kategori</label>
+            <input type="text" name="nama_kategori" id="nama_kategori" class="form-control" required>
+             <label for="keterangan">Keterangan</label>
             <input type="text" name="keterangan" id="keterangan" class="form-control" required>
          </div>
          <button type="sumbit" class="btn btn-primary">Simpan</button>
