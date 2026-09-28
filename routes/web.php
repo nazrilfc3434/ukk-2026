@@ -7,7 +7,7 @@ use App\Controllers\Core\DocsController;
 use App\Controllers\Core\RoleController;
 use App\Controllers\Core\UserController;
 use App\Controllers\KategoriController;
-use App\Controllers\SiswaController;
+use App\Controllers\PenggunaController;
 use App\Controllers\LokasiController;
 use Sakuci\Route;
 
@@ -72,7 +72,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::put('/alat/{id}', [AlatController::class, 'update'])->name('alat.update');
     Route::delete('/alat/{id}', [AlatController::class, 'destroy'])->name('alat.destroy');
 
-    Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+    Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');
+    Route::get('/pengguna/create', [PenggunaController::class, 'create'])->name('pengguna.create');
+    Route::post('/pengguna', [PenggunaController::class, 'store'])->name('pengguna.store');
+    Route::get('/pengguna/{pengguna}/edit', [PenggunaController::class, 'edit'])->name('pengguna.edit');
+    Route::put('/pengguna/{pengguna}', [PenggunaController::class, 'update'])->name('pengguna.update');
+    Route::delete('/pengguna/{pengguna}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy');
 
     Route::get('/lokasi', [LokasiController::class, 'index'])->name('lokasi.index');
     Route::get('/lokasi/create', [LokasiController::class, 'create'])->name('lokasi.create');
