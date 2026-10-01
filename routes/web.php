@@ -9,6 +9,8 @@ use App\Controllers\Core\UserController;
 use App\Controllers\KategoriController;
 use App\Controllers\PenggunaController;
 use App\Controllers\LokasiController;
+use App\Controllers\PengaduanController;
+use App\Controllers\AlatController;
 use Sakuci\Route;
 
 /*
@@ -85,6 +87,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/lokasi/{id_lokasi}/edit',[LokasiController::class,'edit'])->name('lokasi.edit');
     Route::put('/lokasi/{id_lokasi}', [LokasiController::class,'update'])->name('lokasi.update');
     Route::delete('/lokasi/{id_lokasi/{id_lokasi}',[LokasiController::class,'destroy'])->name('loaksi.destroy');
+
+    Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('penganduan.index');
+    Route::get('/pengaduan/create', [PengaduanController::class, 'create'])->name('pengaduan.create');
+    Route::post('/pengaduan/store',[PengaduanController::class,'store'])->name('pengaduan.store.');
+    Route::get('/pengaduan/{id}/edit', [PengaduanController::class, 'edit'])->name('pengaduan.edit');
+    Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('pengaduan.update');
+    Route::delete('/pengaduan/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
+
+    Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan.index');
+Route::get('/pengaduan/create', [PengaduanController::class, 'create'])->name('pengaduan.create');
+Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+Route::get('/pengaduan/{pengaduan}/edit', [PengaduanController::class, 'edit'])->name('pengaduan.edit');
+Route::put('/pengaduan/{pengaduan}', [PengaduanController::class, 'update'])->name('pengaduan.update');
+Route::delete('/pengaduan/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
+ 
 
 });
 

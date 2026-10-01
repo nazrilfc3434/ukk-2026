@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use SakuCI\Controller;
-use SakuCI\Http\Request;
+use Sakuci\Controller;
+use Sakuci\Http\Request;
 use App\Models\Pengaduan;
 
 class PengaduanController extends Controller

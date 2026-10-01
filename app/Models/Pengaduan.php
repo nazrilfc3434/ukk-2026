@@ -2,17 +2,11 @@
 
 namespace App\Models;
 
-use SakuCI\Model;
+use Sakuci\Database\Model;
 
 class Pengaduan extends Model
 {
-    protected $table = 'pengaduan';
-
-    protected $fillable = [
-        'id_user',
-        'judul',
-        'isi',
-        'foto',
-        'status'
-    ];
+    protected static ?string $table = 'pengaduan';
+    protected string $primaryKey = 'id_pengaduan';
+    protected array $fillable = ['id_user', 'judul', 'isi', 'foto', 'status'];
 }
