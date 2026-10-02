@@ -126,4 +126,39 @@ class PengaduanController extends Controller
             ->route('pengaduan.index')
             ->with('success', 'Pengaduan berhasil dihapus.');
     }
+
+    // Menampilkan detail & form tanggapan
+public function show($id)
+{
+    $pengaduan = Pengaduan::where('id_pengaduan', $id)->first();
+
+    if (!$pengaduan) {
+        abort(404, 'Pengaduan tidak ditemukan.');
+    }
+
+    return view('pengaduan.show', compact('pengaduan'));
+}
+
+// Menyimpan tanggapan & memperbarui status
+public function tanggapan(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required',
+        'tanggapan' => 'required',
+    ]);
+
+    $pengaduan = Pengaduan::where('id_pengaduan', $id)->first();
+
+    if (!$pengaduan) {
+        return redirect()->route('pengaduan.index')->with('error', 'Data pengaduan tidak ditemukan.');
+    }
+
+    $pengaduan->update([
+        'status' => $request->status,
+        'tanggapan' => $request->tanggapan,
+    ]);
+
+    return redirect()->route('pengaduan.index')->with('success', 'Tanggapan berhasil disimpan.');
+}
+
 }

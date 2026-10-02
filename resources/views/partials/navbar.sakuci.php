@@ -39,6 +39,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ is_route('alat.index') ? 'active' : '' }}" href="{{ route('alat.index') }}">Alat</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ is_route('pengaduan.index') ? 'active' : '' }}" href="{{ route('pengaduan.index') }}">Pengaduan</a>
+                </li>
                 @php
                     $currentUser = \App\Models\User::current();
                 @endphp

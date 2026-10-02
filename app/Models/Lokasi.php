@@ -12,7 +12,7 @@ class lokasi extends Model
 
             public $timestamps = false;
 
-                protected $fillable = [
-                        'nama_lokasi',
-                            ];
+                protected array $fillable = [
+        'nama'
+    ];
                             }

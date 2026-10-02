@@ -101,6 +101,11 @@ Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengadua
 Route::get('/pengaduan/{pengaduan}/edit', [PengaduanController::class, 'edit'])->name('pengaduan.edit');
 Route::put('/pengaduan/{pengaduan}', [PengaduanController::class, 'update'])->name('pengaduan.update');
 Route::delete('/pengaduan/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
+
+Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
+Route::post('/pengaduan/{id}/tanggapan', [PengaduanController::class, 'tanggapan'])->name('pengaduan.tanggapan');
+
+
  
 
 });
