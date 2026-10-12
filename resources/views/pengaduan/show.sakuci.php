@@ -1,58 +1,50 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
-    <div class="row">
-        <!-- Detail Pengaduan -->
-        <div class="col-md-6 mb-3">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="card-title mb-0">Detail Pengaduan</h5>
-                </div>
-                <div class="card-body">
-                    <h4>{{ $pengaduan->judul }}</h4>
-                    <p class="text-muted">Status: <strong>{{ ucfirst($pengaduan->status) }}</strong></p>
-                    <hr>
-                    <p>{{ $pengaduan->isi }}</p>
 
-                    @if ($pengaduan->foto)
-                        <div class="mt-3">
-                            <label class="fw-bold d-block mb-2">Lampiran Foto:</label>
-                            <img src="/uploads/pengaduan/{{ $pengaduan->foto }}" class="img-fluid rounded" alt="Foto Pengaduan">
-                        </div>
-                    @endif
-                </div>
-            </div>
+<div class="mx-auto" style="max-width: 860px;">
+    <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-3">
+        <div>
+            <h3 class="mb-0">Detail Pengaduan</h3>
+            <small class="text-secondary">Pantau status dan tanggapan untuk laporanmu.</small>
         </div>
+        <a href="{{ route('siswa.pengaduan.index') }}" class="btn btn-outline-secondary">Kembali</a>
+    </div>
 
-        <!-- Form Tanggapan Admin -->
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-success text-white">
-                    <h5 class="card-title mb-0">Tanggapan Admin</h5>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('pengaduan.tanggapan', ['id' => $pengaduan->id_pengaduan]) }}" method="POST">
-                        @csrf
-
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Ubah Status</label>
-                            <select name="status" id="status" class="form-select" required>
-                                <option value="proses" {{ $pengaduan->status == 'proses' ? 'selected' : '' }}>Proses</option>
-                                <option value="selesai" {{ $pengaduan->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="tanggapan" class="form-label">Isi Tanggapan</label>
-                            <textarea name="tanggapan" id="tanggapan" rows="5" class="form-control" placeholder="Tulis tanggapan di sini..." required>{{ $pengaduan->tanggapan ?? '' }}</textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-success w-100">Simpan Tanggapan</button>
-                        <a href="{{ route('pengaduan.index') }}" class="btn btn-secondary w-100 mt-2">Kembali</a>
-                    </form>
-                </div>
+    <div class="card shadow-sm mb-3">
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                <h4 class="mb-0">{{ $pengaduan->judul }}</h4>
+                @if(in_array($pengaduan->status, ['0', 'pending', 'menunggu']))
+                    <span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis">Menunggu</span>
+                @elseif($pengaduan->status == 'proses')
+                    <span class="badge rounded-pill bg-info-subtle text-info-emphasis">Proses</span>
+                @elseif($pengaduan->status == 'selesai')
+                    <span class="badge rounded-pill bg-success-subtle text-success-emphasis">Selesai</span>
+                @endif
             </div>
+
+            <p class="text-secondary mb-1">Lokasi</p>
+            <p>{{ $pengaduan->lokasi ?: '-' }}</p>
+
+            <p class="text-secondary mb-1">Isi pengaduan</p>
+            <p style="white-space: pre-line;">{{ $pengaduan->isi }}</p>
+
+            @if ($pengaduan->foto)
+                <p class="text-secondary mb-1">Foto</p>
+                <img src="/uploads/pengaduan/{{ $pengaduan->foto }}" alt="Foto pengaduan"
+                     class="img-fluid rounded border" style="max-height: 320px;">
+            @endif
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <h5 class="mb-3">Tanggapan</h5>
+            @if (!empty($pengaduan->tanggapan))
+                <p style="white-space: pre-line;" class="mb-0">{{ $pengaduan->tanggapan }}</p>
+            @else
+                <p class="text-secondary mb-0">Belum ada tanggapan dari admin.</p>
+            @endif
         </div>
     </div>
 </div>

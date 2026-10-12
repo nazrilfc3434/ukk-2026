@@ -1,5 +1,5 @@
-<footer class="border-top bg-body py-4 mt-auto">
+<footer class="border-top bg-body py-4 mt-auto w-100">
     <div class="container text-center text-secondary small">
-        Sakuci Framework - Created by Indra Batara, S.Pd., Gr.
+        Sarana & Prasarana Masjid NAZRIL HAFIDZ ZAHRAN
     </div>
 </footer>

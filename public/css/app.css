@@ -5,8 +5,11 @@
 
 :root {
     --brand: #0cd89b;
-    --brand-dark: #ccf000;
-    --brand-subtle: #2900e2;
+    --brand-dark: #09a877;
+    --brand-subtle: #d9fbef;
+
+    --nav-h: 57px;   /* diukur ulang otomatis oleh skrip di navbar */
+    --sb-w: 250px;   /* lebar sidebar */
 }
 
 body {
@@ -87,11 +90,12 @@ body {
     fill: #ffffff;
 }
 
-/* Tombol warna khas Sakuci */
+/* Tombol warna khas Sakuci (teks gelap supaya terbaca di atas hijau terang) */
 .btn-brand {
     background-color: var(--brand);
     border-color: var(--brand);
-    color: #fff;
+    color: #062b20;
+    font-weight: 600;
 }
 
 .btn-brand:hover,
@@ -99,17 +103,17 @@ body {
 .btn-brand:active {
     background-color: var(--brand-dark);
     border-color: var(--brand-dark);
-    color: #fff;
+    color: #062b20;
 }
 
 .btn-outline-brand {
     border-color: var(--brand);
-    color: var(--brand);
+    color: var(--brand-dark);
 }
 
 .btn-outline-brand:hover {
     background-color: var(--brand);
-    color: #fff;
+    color: #062b20;
 }
 
 .text-brand   { color: var(--brand) !important; }
@@ -183,7 +187,7 @@ code.inline {
 .demo-box {
     padding: .6rem .5rem;
     background: var(--brand-subtle);
-    border: 1px solid #fdba8c;
+    border: 1px solid #8eeccf;
     border-radius: 6px;
     color: var(--brand-dark);
     font-size: .8rem;
@@ -205,7 +209,146 @@ code.inline {
     color: var(--brand);
 }
 
-/* Varian tema gelap untuk komponen yang warnanya di-hardcode di atas */
+/* ===================================================================
+   Sidebar
+   =================================================================== */
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .55rem .75rem;
+    border-radius: 8px;
+    color: var(--bs-body-color);
+    text-decoration: none;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.sidebar-link:hover {
+    background: var(--bs-tertiary-bg);
+    color: var(--brand-dark);
+}
+
+.sidebar-link.active {
+    background: color-mix(in srgb, var(--brand) 16%, transparent);
+    color: var(--brand-dark);
+    font-weight: 700;
+    border-left-color: var(--brand);
+}
+
+.sidebar-link:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+}
+
+.sidebar-group {
+    font-size: .8rem;
+    color: var(--bs-secondary-color);
+    padding: 1rem .75rem .35rem;
+}
+
+@media (min-width: 992px) {
+    .app-sidebar {
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        bottom: 0;
+        width: var(--sb-w);
+        overflow-y: auto;
+        z-index: 1010;
+        background: var(--bs-body-bg);
+        border-right: 1px solid var(--bs-border-color);
+    }
+
+    /* Geser konten dan footer ke kanan, hanya jika sidebar ada */
+    body:has(.app-sidebar) main,
+    body:has(.app-sidebar) footer {
+        margin-left: var(--sb-w);
+    }
+
+    body:has(.app-sidebar) main {
+        max-width: none;
+        padding-inline: 2rem;
+    }
+}
+
+/* ===================================================================
+   Halaman pengaduan
+   =================================================================== */
+
+.table-pengaduan th {
+    font-size: .85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: .85rem 1rem;
+}
+
+.table-pengaduan td {
+    padding: .9rem 1rem;
+    vertical-align: middle;
+}
+
+.table-pengaduan .isi {
+    max-width: 260px;
+    color: var(--bs-secondary-color);
+}
+
+.table-pengaduan .thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.table-pengaduan .badge {
+    font-weight: 600;
+    padding: .4em .85em;
+}
+
+.form-pengaduan .form-label {
+    font-weight: 600;
+}
+
+.form-pengaduan .preview {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--bs-border-color);
+    background: var(--bs-tertiary-bg);
+}
+
+.form-pengaduan .preview-kosong {
+    display: grid;
+    place-items: center;
+    color: var(--bs-secondary-color);
+    font-size: .85rem;
+}
+
+.form-pengaduan .form-control:focus,
+.form-pengaduan .form-select:focus,
+.card-header .form-control:focus,
+.card-header .form-select:focus {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--brand) 25%, transparent);
+}
+
+/* Pagination mengikuti warna brand */
+.pagination {
+    --bs-pagination-color: var(--brand-dark);
+    --bs-pagination-hover-color: var(--brand-dark);
+    --bs-pagination-active-bg: var(--brand);
+    --bs-pagination-active-border-color: var(--brand);
+    --bs-pagination-active-color: #062b20;
+    --bs-pagination-focus-box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--brand) 25%, transparent);
+}
+
+/* ===================================================================
+   Varian tema gelap
+   =================================================================== */
+
 [data-bs-theme="dark"] code.inline {
     background: #1e293b;
     color: #e2e8f0;
@@ -240,14 +383,14 @@ code.inline {
 [data-bs-theme="dark"] .badge-brand,
 [data-bs-theme="dark"] .bg-brand-subtle,
 [data-bs-theme="dark"] .step-number {
-    background-color: rgba(194, 65, 12, .18) !important;
-    color: #fb923c;
+    background-color: rgba(12, 216, 155, .16) !important;
+    color: var(--brand);
 }
 
 [data-bs-theme="dark"] .demo-box {
-    background-color: rgba(194, 65, 12, .18);
-    border-color: rgba(194, 65, 12, .4);
-    color: #fb923c;
+    background-color: rgba(12, 216, 155, .16);
+    border-color: rgba(12, 216, 155, .4);
+    color: var(--brand);
 }
 
 [data-bs-theme="dark"] .demo-box-alt {
@@ -256,3 +399,16 @@ code.inline {
     color: #a5b4fc;
 }
 
+[data-bs-theme="dark"] .btn-outline-brand {
+    color: var(--brand);
+}
+
+[data-bs-theme="dark"] .sidebar-link:hover,
+[data-bs-theme="dark"] .sidebar-link.active {
+    color: var(--brand);
+}
+
+[data-bs-theme="dark"] .pagination {
+    --bs-pagination-color: var(--brand);
+    --bs-pagination-hover-color: var(--brand);
+}

@@ -1,17 +1,31 @@
-@extends ('layouts.app')
+@extends('layouts.app')
+@section('content')
 
-@section ('content')
+<div class="container py-4" style="max-width: 560px;">
+    <div class="mb-3">
+        <h3 class="mb-0">Tambah Kategori</h3>
+        <small class="text-secondary">Beri nama yang singkat dan jelas.</small>
+    </div>
 
-<div class="container">
-    <h1>Tambah Kategori</h1>
-    <form action="{{ route('kategori.store') }}" method="POST">
-        @csrf 
-        <div class="form-group mb-3">
-            <label for="keterangan">Nama Kategori</label>
-            <input type="text" name="nama_kategori" id="nama_kategori" class="form-control" required>
-             <label for="keterangan">Keterangan</label>
-            <input type="text" name="keterangan" id="keterangan" class="form-control" required>
-         </div>
-         <button type="sumbit" class="btn btn-primary">Simpan</button>
-</form>
+    @if(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <form action="{{ route('kategori.store') }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="nama_kategori" class="form-label fw-semibold">Nama kategori</label>
+                    <input type="text" id="nama_kategori" name="nama_kategori" class="form-control"
+                           value="{{ old('nama_kategori') }}" maxlength="100" placeholder="Contoh: Kebersihan" required autofocus>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">Simpan kategori</button>
+                    <a href="{{ route('kategori.index') }}" class="btn btn-outline-secondary">Batal</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection

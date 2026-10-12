@@ -8,7 +8,6 @@ use App\Controllers\Core\RoleController;
 use App\Controllers\Core\UserController;
 use App\Controllers\KategoriController;
 use App\Controllers\PenggunaController;
-use App\Controllers\LokasiController;
 use App\Controllers\PengaduanController;
 use App\Controllers\AlatController;
 use Sakuci\Route;
@@ -50,23 +49,28 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'admin'])->name('admin.dashboard');
 
+    // Roles
     Route::get('/roles', [RoleController::class, 'index'])->name('admin.roles.index');
     Route::post('/roles', [RoleController::class, 'store'])->name('admin.roles.store');
     Route::put('/roles/{role}', [RoleController::class, 'update'])->name('admin.roles.update');
     Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('admin.roles.destroy');
 
+    // Users
     Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
 
+    // Database
     Route::get('/database/export', [DatabaseController::class, 'export'])->name('admin.database.export');
-    
+
+    // Kategori
     Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
     Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
-    Route::post('/kategori/store', [KategoriController::class, 'store'])->name('kategori.store');
-    Route::get('/kategori/{id_kategori}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
-    Route::put('/kategori/{id_kategori}', [KategoriController::class, 'update'])->name('kategori.update');
-    Route::delete('/kategori/{id_kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+    Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
+    Route::get('/kategori/{id}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
+    Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+    Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
+    // Alat
     Route::get('/alat', [AlatController::class, 'index'])->name('alat.index');
     Route::get('/alat/create', [AlatController::class, 'create'])->name('alat.create');
     Route::post('/alat', [AlatController::class, 'store'])->name('alat.store');
@@ -74,6 +78,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::put('/alat/{id}', [AlatController::class, 'update'])->name('alat.update');
     Route::delete('/alat/{id}', [AlatController::class, 'destroy'])->name('alat.destroy');
 
+    // Pengguna
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');
     Route::get('/pengguna/create', [PenggunaController::class, 'create'])->name('pengguna.create');
     Route::post('/pengguna', [PenggunaController::class, 'store'])->name('pengguna.store');
@@ -81,33 +86,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::put('/pengguna/{pengguna}', [PenggunaController::class, 'update'])->name('pengguna.update');
     Route::delete('/pengguna/{pengguna}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy');
 
-    Route::get('/lokasi', [LokasiController::class, 'index'])->name('lokasi.index');
-    Route::get('/lokasi/create', [LokasiController::class, 'create'])->name('lokasi.create');
-    Route::post('/lokasi/store',[LokasiController::class,'store'])->name('lokasi.store.');
-    Route::get('/lokasi/{id_lokasi}/edit',[LokasiController::class,'edit'])->name('lokasi.edit');
-    Route::put('/lokasi/{id_lokasi}', [LokasiController::class,'update'])->name('lokasi.update');
-    Route::delete('/lokasi/{id_lokasi/{id_lokasi}',[LokasiController::class,'destroy'])->name('loaksi.destroy');
-
-    Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('penganduan.index');
+    // Pengaduan (/create harus di atas /{id})
+    Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan.index');
     Route::get('/pengaduan/create', [PengaduanController::class, 'create'])->name('pengaduan.create');
-    Route::post('/pengaduan/store',[PengaduanController::class,'store'])->name('pengaduan.store.');
+    Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
     Route::get('/pengaduan/{id}/edit', [PengaduanController::class, 'edit'])->name('pengaduan.edit');
+    Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
+    Route::post('/pengaduan/{id}/tanggapan', [PengaduanController::class, 'tanggapan'])->name('pengaduan.tanggapan');
     Route::put('/pengaduan/{id}', [PengaduanController::class, 'update'])->name('pengaduan.update');
     Route::delete('/pengaduan/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
 
-    Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan.index');
-Route::get('/pengaduan/create', [PengaduanController::class, 'create'])->name('pengaduan.create');
-Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
-Route::get('/pengaduan/{pengaduan}/edit', [PengaduanController::class, 'edit'])->name('pengaduan.edit');
-Route::put('/pengaduan/{pengaduan}', [PengaduanController::class, 'update'])->name('pengaduan.update');
-Route::delete('/pengaduan/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
-
-Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
-Route::post('/pengaduan/{id}/tanggapan', [PengaduanController::class, 'tanggapan'])->name('pengaduan.tanggapan');
-
-
- 
-
+    
 });
 
 /*
@@ -129,19 +118,18 @@ Route::group(['prefix' => 'siswa', 'middleware' => 'siswa'], function () {
 
 /*
 |--------------------------------------------------------------------------
-| Contoh (hapus/ubah sesuai kebutuhan)
+| Fitur siswa (di luar blok @generated-roles supaya tidak tertimpa)
 |--------------------------------------------------------------------------
-|
-| use App\Controllers\BukuController;
-|
-| Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
-|
-| // Tujuh route CRUD sekaligus: index, create, store, show, edit, update, destroy
-| // Route::resource
-|
-| // Group dengan prefix dan middleware bersama
-| Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-|     Route::get('/dashboard', [DashboardController::class, 'index']);
-| });
+| Siswa bisa membuat dan melihat pengaduan miliknya, serta melihat alat.
+| /pengaduan/create harus di atas /pengaduan/{id}.
 */
+Route::group(['prefix' => 'siswa', 'middleware' => 'siswa'], function () {
+    Route::get('/pengaduan', [PenggunaController::class, 'pengaduan'])->name('siswa.pengaduan.index');
+    Route::get('/pengaduan/create', [PengaduanController::class, 'create'])->name('siswa.pengaduan.create');
+    Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('siswa.pengaduan.store');
+    Route::get('/pengaduan/{id}', [PenggunaController::class, 'pengaduanShow'])->name('siswa.pengaduan.show');
 
+    Route::get('/alat', [PenggunaController::class, 'alat'])->name('siswa.alat.index');
+
+    
+});
